@@ -99,23 +99,20 @@ test('a /resume in the process reads the resumed session\'s transcript', async (
   on('clock.now', () => ({ value: AT + 12 * MIN }))
   on('clock.every', () => ({ value: undefined }))
   on('classic.SessionStart', () => ({}) as any)
-  let sid = 's1'
-  on('session.id', () => ({ value: sid }))
+  on('session.id', () => ({ value: 's1' }))
   const ids: string[] = []
   on('process.run', (_, e) => {
     const isDate = e.argv[0] === 'date'
     if (!isDate) ids.push(String(e.argv[4]))
-    const stdout = isDate ? '+1300\n' : sid === 's2' ? 'u1\t2026-11-06T01:02:00.000Z\n' : ''
+    const stdout = isDate ? '+1300\n' : ''
     return { value: { exitCode: 0, stdout, stderr: '', signal: null, isTimedOut: false } as never }
   })
 
   await $.session.start({ cwd: '/p', surface: 'terminal', isInteractive: true })
-  sid = 's2'
-  await $.classic.SessionStart({ source: 'resume' } as any)
+  // The hook's session_id names the new session before $.session.id() does.
+  await $.classic.SessionStart({ source: 'resume', session_id: 's2' } as any)
   // Both reads run unawaited; let them settle.
   await new Promise(r => (globalThis as any).setTimeout(r, 20))
 
-  // One read at start and one for the resumed session, the last for s2.
-  expect(ids.length).toBe(2)
-  expect(ids[1]).toBe('s2')
+  expect(ids).toEqual(['s1', 's2'])
 })

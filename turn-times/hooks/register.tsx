@@ -69,12 +69,12 @@ export function parseStamps(stdout: string): Record<string, number> {
   return out
 }
 
-async function backfill($: EngineInterface): Promise<void> {
+async function backfill($: EngineInterface, sessionId?: string): Promise<void> {
   try {
     const tz = await $.process.run(['date', '+%z'])
     const off = parseOffset(tz.stdout)
     if (off !== undefined) await update($, offset, () => off)
-    const r = await $.process.run(['sh', '-c', STAMPS, 'sh', await $.session.id()])
+    const r = await $.process.run(['sh', '-c', STAMPS, 'sh', sessionId ?? (await $.session.id())])
     if (r.exitCode === 0) {
       const stamps = parseStamps(r.stdout)
       await update($, loaded, () => stamps)
@@ -160,7 +160,9 @@ export const register: Register = on => {
     if (e.source !== 'startup') {
       const t = await $.clock.now()
       await update($, now, () => t)
-      void backfill($)
+      // The hook's own session_id is the new session's, which $.session.id()
+      // may not report yet while the switch is under way.
+      void backfill($, e.session_id)
     }
     return result
   })
