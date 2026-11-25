@@ -38,7 +38,7 @@ On a subscription, how much of the 5-hour and weekly limits you've used and when
 
 ![A ticket board beside the chat: next up, blocked and progress per spec, colour coded by status](docs/scratch-board.png)
 
-A live board of the specs and tickets in your project's `.scratch/` folder: what's next, what's blocked and on what, and progress per spec. It opens itself when `.scratch/` has something in it and updates as files change. Open it with `/tickets`.
+A live board of the specs and tickets in your project's `.scratch/` folder, the local markdown issues that [Matt Pocock's skills](https://github.com/mattpocock/skills) manage (with the default triage labels): what's next, what's blocked and on what, and progress per spec. It opens itself when `.scratch/` has something in it and updates as files change. Open it with `/tickets`.
 
 ### [turn-times](turn-times/)
 

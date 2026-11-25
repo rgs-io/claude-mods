@@ -2,6 +2,8 @@
 
 A live board of the specs and tickets in your project's `.scratch/` folder.
 
+It's built for the local markdown issues that [Matt Pocock's skills](https://github.com/mattpocock/skills) manage: pick "Local markdown" as the tracker and keep the default triage labels when you run [setup-matt-pocock-skills](https://github.com/mattpocock/skills/blob/main/skills/engineering/setup-matt-pocock-skills/SKILL.md). Then [to-spec](https://github.com/mattpocock/skills/blob/main/skills/engineering/to-spec/SKILL.md) and [to-tickets](https://github.com/mattpocock/skills/blob/main/skills/engineering/to-tickets/SKILL.md) write the specs and tickets, [triage](https://github.com/mattpocock/skills/blob/main/skills/engineering/triage/SKILL.md) moves them between states, and the board shows them as they change. Renamed labels show uncoloured.
+
 ![The board: next up, blocked, and progress per spec](../docs/scratch-board.png)
 
 ## Install
@@ -22,7 +24,7 @@ One folder per feature, with a spec and numbered tickets:
       03-shopping-list.md    # "# 03: …", "**Status:** in-progress", "**Blocked by:** 01"
 ```
 
-Statuses: `ready-for-agent`, `in-progress` (or `claimed`), `ready-for-human`, `needs-triage`, `needs-info`, `done` (or `resolved`) and `wontfix`. A `**What to build:**` paragraph shows when you expand a ticket.
+Statuses: the five default triage labels (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`), plus `in-progress` (or `claimed`) and `done` (or `resolved`). A `**What to build:**` paragraph shows when you expand a ticket.
 
 ## Using it
 
