@@ -153,6 +153,18 @@ export const register: Register = on => {
     return result
   })
 
+  // A /resume or /clear goes on in this process under another session, with
+  // its own $.state and transcript; session.start doesn't fire for it.
+  on('classic.SessionStart', async ($, e, next) => {
+    const result = await next(e)
+    if (e.source !== 'startup') {
+      const t = await $.clock.now()
+      await update($, now, () => t)
+      void backfill($)
+    }
+    return result
+  })
+
   // A turn's closing line is written straight to the transcript, past
   // session.append, so its time is read from the file once it lands there.
   on('turn.complete', async ($, e, next) => {

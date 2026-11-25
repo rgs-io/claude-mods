@@ -141,3 +141,40 @@ test('an open pane closes when .scratch empties, and /tickets with nothing opens
   expect(opens).toBe(0)
   expect(JSON.stringify(ran)).toContain('No specs or tickets')
 })
+
+test('a /resume in the process fills the new session\'s board from the same files', async ($, on) => {
+  on('command.register', () => ({ value: { command: 'tickets' } }))
+  on('ui.open', () => ({ value: { isPlaced: true } }))
+  on('session.start', (_, e) => ({ cwd: e.cwd }))
+  on('clock.every', () => ({ value: undefined }))
+  on('session.root', () => ({ value: '/p' }))
+  on('fs.list', (_, e) => {
+    const dir = e.path ?? '/p'
+    const names = new Map<string, 'file' | 'dir'>()
+    for (const path of Object.keys(FILES)) {
+      if (!path.startsWith(`${dir}/`)) continue
+      const [head, ...rest] = path.slice(dir.length + 1).split('/')
+      names.set(head!, rest.length ? 'dir' : 'file')
+    }
+    if (names.size === 0) throw new Error('ENOENT')
+    return { value: [...names].map(([name, kind]) => entry(name, kind)) }
+  })
+  on('fs.read', (_, e) => ({ value: FILES[e.path]! }))
+
+  on('classic.SessionStart', () => ({}) as any)
+  let writes = 0
+  on('state.set', (_: any, e: any, next: any) => {
+    if (e.key === 'features') writes++
+    return next(e)
+  })
+
+  await $.session.start({ cwd: '/p', surface: 'terminal', isInteractive: true })
+  expect(writes).toBe(1)
+  // The resumed session's state starts empty, so the board is written to it
+  // again though the files haven't changed.
+  await $.classic.SessionStart({ source: 'resume' } as any)
+  expect(writes).toBe(2)
+  // A startup is session.start's to handle, not this hook's.
+  await $.classic.SessionStart({ source: 'startup' } as any)
+  expect(writes).toBe(2)
+})

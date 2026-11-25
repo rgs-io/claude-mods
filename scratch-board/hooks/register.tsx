@@ -147,6 +147,18 @@ export const register: Register = on => {
     return next(e)
   })
 
+  // A /resume or /clear goes on in this process under another session, whose
+  // $.state holds no board yet; session.start doesn't fire for it, so rescan
+  // here, forgetting the last scan so the new session's state gets filled.
+  on('classic.SessionStart', async ($, e, next) => {
+    const result = await next(e)
+    if (e.source !== 'startup') {
+      lastSignature = ''
+      await scan($).catch(() => {})
+    }
+    return result
+  })
+
   on('command.run', { command: 'tickets' }, async $ => {
     // Set first, so the scan does not open the pane as well.
     autoOpened = true
