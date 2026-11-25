@@ -1,0 +1,21 @@
+{
+  "name": "screenshots",
+  "version": "0.2.0",
+  "description": "Shows PNG screenshots that agents read or push in a side pane, drawn inline with kitty graphics",
+  "author": {
+    "name": "Robin Stark",
+    "url": "https://github.com/robinstark"
+  },
+  "homepage": "https://github.com/rgs-io/claude-mods/tree/main/screenshots",
+  "repository": "https://github.com/rgs-io/claude-mods",
+  "license": "MIT",
+  "types": "./types/index.d.ts",
+  "userConfig": {
+    "cellPixels": {
+      "type": "string",
+      "title": "Terminal cell size in pixels",
+      "description": "Width x height of one terminal cell, e.g. 9x19, so 1:1 shows an image at its native size. Raise it if 1:1 looks too big.",
+      "default": "9x19"
+    }
+  }
+}

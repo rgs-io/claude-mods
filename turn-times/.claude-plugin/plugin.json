@@ -1,0 +1,13 @@
+{
+  "name": "turn-times",
+  "version": "0.2.0",
+  "description": "Clock time and how long ago (14:02 · 12 min ago) beside each prompt, reply and turn's end",
+  "author": {
+    "name": "Robin Stark",
+    "url": "https://github.com/robinstark"
+  },
+  "homepage": "https://github.com/rgs-io/claude-mods/tree/main/turn-times",
+  "repository": "https://github.com/rgs-io/claude-mods",
+  "license": "MIT",
+  "types": "./types/index.d.ts"
+}

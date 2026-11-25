@@ -1,0 +1,44 @@
+{
+  "name": "import-session",
+  "version": "0.4.0",
+  "description": "Shows which Claude profile (config dir) you are in, and imports sessions for this project from your other profiles",
+  "author": {
+    "name": "Robin Stark",
+    "url": "https://github.com/robinstark"
+  },
+  "homepage": "https://github.com/rgs-io/claude-mods/tree/main/import-session",
+  "repository": "https://github.com/rgs-io/claude-mods",
+  "license": "MIT",
+  "userConfig": {
+    "profiles": {
+      "type": "string",
+      "title": "Profiles to list",
+      "description": "Config dirs whose sessions /import-session lists, comma-separated: a name like claude-work (meaning ~/.claude-work), a ~/ path or an absolute path. The current profile is always left out.",
+      "default": "claude, claude-work"
+    },
+    "otherProfiles": {
+      "type": "string",
+      "title": "Other profiles (folded)",
+      "description": "Config dirs listed only with /import-session --others, same format. Empty: every other ~/.claude* dir that has a projects folder.",
+      "default": ""
+    },
+    "showProfile": {
+      "type": "boolean",
+      "title": "Show the current profile",
+      "description": "Show the current profile's name (and its emoji, if set) at the end of the hint line under the prompt, where \"auto mode on\" shows.",
+      "default": true
+    },
+    "profileEmoji": {
+      "type": "string",
+      "title": "Emoji per profile",
+      "description": "Optional emoji per profile, comma-separated name=emoji pairs, e.g. claude=🔑, claude-work=💼, claude-personal=🏠. Shown under the prompt and in the /import-session list.",
+      "default": ""
+    },
+    "autoResume": {
+      "type": "boolean",
+      "title": "Resume after import",
+      "description": "Switch to the session right after /import-session copies it. Override per run with --no-resume (or --resume when this is off).",
+      "default": true
+    }
+  }
+}

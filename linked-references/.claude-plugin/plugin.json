@@ -1,0 +1,12 @@
+{
+  "name": "linked-references",
+  "version": "0.2.0",
+  "description": "Every numbered reference (PR, issue, Jira or Linear ticket, commit) is a link, with its title when context doesn't say what it is",
+  "author": {
+    "name": "Robin Stark",
+    "url": "https://github.com/robinstark"
+  },
+  "homepage": "https://github.com/rgs-io/claude-mods/tree/main/linked-references",
+  "repository": "https://github.com/rgs-io/claude-mods",
+  "license": "MIT"
+}

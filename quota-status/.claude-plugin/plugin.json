@@ -1,0 +1,13 @@
+{
+  "name": "quota-status",
+  "version": "0.5.0",
+  "description": "Status line: plan quota and time to reset (5h session, week), or dollars spent on API pricing, plus context window fill",
+  "author": {
+    "name": "Robin Stark",
+    "url": "https://github.com/robinstark"
+  },
+  "homepage": "https://github.com/rgs-io/claude-mods/tree/main/quota-status",
+  "repository": "https://github.com/rgs-io/claude-mods",
+  "license": "MIT",
+  "types": "./types/index.d.ts"
+}

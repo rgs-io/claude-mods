@@ -1,0 +1,13 @@
+{
+  "name": "scratch-board",
+  "version": "0.3.0",
+  "description": "Live pane of the specs and tickets in .scratch/, sorted by triage status and colour coded",
+  "author": {
+    "name": "Robin Stark",
+    "url": "https://github.com/robinstark"
+  },
+  "homepage": "https://github.com/rgs-io/claude-mods/tree/main/scratch-board",
+  "repository": "https://github.com/rgs-io/claude-mods",
+  "license": "MIT",
+  "types": "./types/index.d.ts"
+}

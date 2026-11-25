@@ -1,0 +1,12 @@
+{
+  "name": "writing-for-slack",
+  "version": "0.1.0",
+  "description": "Messages written for pasting into Slack: raw markdown characters, - bullets, :name: emoji",
+  "author": {
+    "name": "Robin Stark",
+    "url": "https://github.com/robinstark"
+  },
+  "homepage": "https://github.com/rgs-io/claude-mods/tree/main/writing-for-slack",
+  "repository": "https://github.com/rgs-io/claude-mods",
+  "license": "MIT"
+}
